@@ -3,7 +3,7 @@
 **Status**: v0.1 operational gap inventory  
 **Audience**: users making deployment decisions, contributors choosing high-impact work, security reviewers  
 **Derived from**: `THREAT_MODEL.md` §4  
-**Related specs**: `CLASSIFIER_SPEC.md`, `CDP_GUARD_SPEC.md`, `FSEVENTS_DETECTION_SPEC.md`, `TAMPER_RESISTANCE_SPEC.md`, `APPLE_ES_APPLICATION.md`
+**Related specs**: `CLASSIFIER_SPEC.md`, `CDP_GUARD_SPEC.md`, `FSEVENTS_DETECTION_SPEC.md`, `TAMPER_RESISTANCE_SPEC.md`, `INVISIBILITY_SPEC.md`, `CAPABILITY_SCOPING_SPEC.md`, `HUMAN_APPROVAL_SPEC.md`, `CROSS_PLATFORM_ARCHITECTURE.md`, `APPLE_ES_APPLICATION.md`
 
 ---
 
@@ -25,9 +25,9 @@ Use this document with `THREAT_MODEL.md`. The threat model explains boundaries. 
 
 **Why not in v0.1:** macOS FSEvents is asynchronous. It provides path activity but not synchronous authorization. Blocking reads requires Endpoint Security `ES_EVENT_TYPE_AUTH_OPEN`, and Apple must grant `com.apple.developer.endpoint-security.client`.
 
-**What's needed:** ES client entitlement, a System Extension or privileged daemon integration that handles `AUTH_OPEN`, classifier lookup on the hot path, and careful timeout behavior so normal filesystem operations do not stall.
+**What's needed:** ES client entitlement, a System Extension or privileged daemon integration that handles `AUTH_OPEN`, classifier lookup on the hot path, and careful timeout behavior so normal filesystem operations do not stall. v0.2 also needs `HUMAN_APPROVAL_SPEC.md` for legitimate access prompts and `CAPABILITY_SCOPING_SPEC.md` for narrow workspace-scoped exceptions.
 
-**Target release:** v0.2, awaiting Apple.
+**Target release:** v0.2, awaiting Apple. The chosen protection direction is invisibility where the platform permits it, with human approval and scoped exceptions for intentional access.
 
 **User mitigation today:** Treat v0.1 filesystem alerts as evidence and early warning. Keep high-value secrets out of agent-accessible working directories. Use hardware-backed keys where possible. Do not run agents in shells with broad access to wallet or cloud directories.
 
@@ -41,9 +41,9 @@ Use this document with `THREAT_MODEL.md`. The threat model explains boundaries. 
 
 **Why not in v0.1:** Same entitlement gap as read prevention. FSEvents reports after the write. Synchronous denial requires Endpoint Security authorization events such as `ES_EVENT_TYPE_AUTH_OPEN`, and in some cases rename/unlink authorization.
 
-**What's needed:** ES enforcement for writes, renames, unlinks, and directory enumeration, plus policy decisions for whether some writes by non-agent tools should remain allowed.
+**What's needed:** ES enforcement for writes, renames, unlinks, and directory enumeration, plus policy decisions for whether some writes by non-agent tools should remain allowed. High-risk writes need human approval before any persistent exception is created, and approved writes should be scoped by workspace where possible.
 
-**Target release:** v0.2, awaiting Apple.
+**Target release:** v0.2, awaiting Apple. `HUMAN_APPROVAL_SPEC.md` and `CAPABILITY_SCOPING_SPEC.md` define the approval and exception model.
 
 **User mitigation today:** Keep backups of important config and wallet directories. Watch the signed audit feed. Use Git or backup tools for configuration folders where rollback matters.
 
@@ -185,9 +185,9 @@ Use this document with `THREAT_MODEL.md`. The threat model explains boundaries. 
 
 **Why not in v0.1:** Real tamper resistance requires a combination of production signing, Endpoint Security, code signature self-verification, policy integrity, and prevention hooks. v0.1 ships tamper-evident audit continuity, peer-disconnect alerts, and pf auto-reload, but not the full prevention stack.
 
-**What's needed:** The remaining mechanisms in `TAMPER_RESISTANCE_SPEC.md`: launchd-state polling, code signature checks, policy row HMACs, immutable rotated logs, and ES prevention if granted. Hash-chained audit logs, peer watchdog detection, and pf rule re-validation are implemented in v0.1.
+**What's needed:** The remaining mechanisms in `TAMPER_RESISTANCE_SPEC.md`: launchd-state polling, code signature checks, policy row HMACs, immutable rotated logs, and ES prevention if granted. Hash-chained audit logs, peer watchdog detection, and pf rule re-validation are implemented in v0.1. Persistent approvals and workspace-scoped exceptions must be integrity-protected too, because direct policy edits are a tamper path.
 
-**Target release:** v0.2 for detection and recovery; ES prevention awaiting Apple.
+**Target release:** v0.2 for detection, recovery, policy integrity, and approval-rule integrity; ES prevention awaiting Apple.
 
 **User mitigation today:** Do not grant agents broad sudo. Avoid `NOPASSWD` for agent-run commands. Treat root-capable agents as fully trusted or do not run them.
 
@@ -341,9 +341,9 @@ Use this document with `THREAT_MODEL.md`. The threat model explains boundaries. 
 
 ### High severity, v0.2 with ES entitlement
 
-- Gap 1: Filesystem read prevention.
-- Gap 2: Filesystem write prevention.
-- Gap 11: Tamper resistance against root agents.
+- Gap 1: Filesystem read prevention, plus human approval and workspace-scoped exceptions for legitimate access.
+- Gap 2: Filesystem write prevention, plus approval-scoped write exceptions.
+- Gap 11: Tamper resistance against root agents, including integrity for approval and capability-scoping policy rows.
 
 ### High severity, v0.3 with broader OS integration
 
