@@ -1,6 +1,6 @@
 # SECURITY_OVERVIEW_SPEC
 
-**Status**: v0.2 architecture spec  
+**Status**: v0.1 implemented; refinements continue in v0.2 and v0.3  
 **Owner**: SanctuaryMenuBar  
 **Related specs**: `CLASSIFIER_SPEC.md`, `FSEVENTS_DETECTION_SPEC.md`, `EXTENSION_STORAGE_SPEC.md`, `CAPABILITY_SCOPING_SPEC.md`, `HUMAN_APPROVAL_SPEC.md`, `COVERAGE_GAPS.md`, `THREAT_MODEL.md`
 
@@ -342,4 +342,3 @@ v0.1 onboarding handles initial setup. The menu bar handles day-to-day status an
 **Why no disable controls:** The overview is for understanding coverage. Turning protection off is a high-stakes action that belongs in settings with explicit confirmation and owner authentication.
 
 **Why deferred to v0.2:** v0.1 onboarding handles initial setup. The overview is most valuable after the user has been using Sanctuary for some time and after Endpoint Security can give precise per-resource activity. v0.1 can ship without it.
-
