@@ -18,7 +18,8 @@ struct MenuBarPreviewSmokeTests {
             "ExtensionsSection",
             "AgentsSection",
             "ActivitySection",
-            "ProtectionToggleSection"
+            "ProtectionToggleSection",
+            "SecurityOverviewSection"
         ]
 
         for section in sections {

@@ -84,6 +84,8 @@ public final class MenuBarDataSource {
     public var installationStatus: DaemonInstallation.Status = .notInstalled
     public var peerHealthStatus: PeerHealthStatus = .healthy
     public var cdpGuardHealth: CDPGuardHealth = .healthy
+    public var securityOverview: SecurityOverviewSnapshot = .empty
+    public var lastSecurityOverviewScanAt: Date?
     public var agentGroups: [AgentGroup] {
         Self.groupAgents(agents)
     }
@@ -100,7 +102,14 @@ public final class MenuBarDataSource {
     @ObservationIgnored private let uninstallProtection: () async throws -> Void
     @ObservationIgnored private let auditTailReader: AuditTailReader
     @ObservationIgnored private let activityLoader: () -> [ActivityEntry]
+    @ObservationIgnored private let discoveredResourceLoader: () -> [DiscoveredResource]
+    @ObservationIgnored private let dismissedResourceLoader: () -> [DismissedResource]
+    @ObservationIgnored private let coverageGapLoader: () -> [CoverageGapSummary]
+    @ObservationIgnored private let pathExists: (String) -> Bool
     @ObservationIgnored private let now: () -> Date
+    @ObservationIgnored private let overviewLock = NSLock()
+    @ObservationIgnored private var cachedDiscoveredResources: [DiscoveredResource] = []
+    @ObservationIgnored private var cachedLastSecurityOverviewScanAt: Date?
     @ObservationIgnored private var timer: DispatchSourceTimer?
 
     private struct Snapshot {
@@ -115,6 +124,8 @@ public final class MenuBarDataSource {
         let protectionEnabled: Bool
         let status: ProtectionStatus
         let cdpGuardHealth: CDPGuardHealth
+        let securityOverview: SecurityOverviewSnapshot
+        let lastSecurityOverviewScanAt: Date?
     }
 
     public convenience init() {
@@ -164,6 +175,14 @@ public final class MenuBarDataSource {
         installProtection: @escaping () async throws -> Void = {},
         uninstallProtection: @escaping () async throws -> Void = {},
         activityLoader: (() -> [ActivityEntry])? = nil,
+        discoveredResourceLoader: @escaping () -> [DiscoveredResource] = {
+            SecurityOverviewBuilder.defaultDiscoveredResources()
+        },
+        dismissedResourceLoader: @escaping () -> [DismissedResource] = { [] },
+        coverageGapLoader: @escaping () -> [CoverageGapSummary] = {
+            SecurityOverviewBuilder.defaultCoverageGaps()
+        },
+        pathExists: @escaping (String) -> Bool = { FileManager.default.fileExists(atPath: $0) },
         now: @escaping @Sendable () -> Date = { Date() }
     ) {
         self.folderLoader = folderLoader
@@ -181,6 +200,10 @@ public final class MenuBarDataSource {
         self.activityLoader = activityLoader ?? {
             reader.recentEntries(within: 3600, limit: 5)
         }
+        self.discoveredResourceLoader = discoveredResourceLoader
+        self.dismissedResourceLoader = dismissedResourceLoader
+        self.coverageGapLoader = coverageGapLoader
+        self.pathExists = pathExists
         self.now = now
     }
 
@@ -265,6 +288,18 @@ public final class MenuBarDataSource {
         BrowserProfileExtensionDiscovery.discoverInstalledKnownExtensions()
     }
 
+    @MainActor
+    public func rescanSecurityOverview() {
+        let discovered = discoveredResourceLoader()
+        let scanDate = now()
+        overviewLock.withLock {
+            cachedDiscoveredResources = discovered
+            cachedLastSecurityOverviewScanAt = scanDate
+        }
+        lastSecurityOverviewScanAt = scanDate
+        refresh()
+    }
+
     private func loadSnapshot() -> Snapshot {
         let loadedFolders = (try? folderLoader()) ?? []
         let loadedExtensions = (try? extensionLoader()) ?? []
@@ -289,6 +324,20 @@ public final class MenuBarDataSource {
         let loadedActivities = activityLoader()
         let loadedInstallationStatus = installationStatusLoader()
         let loadedAuditLogPath = auditLogPath()
+        let loadedDiscoveredResources = overviewLock.withLock { cachedDiscoveredResources }
+        let loadedDismissedResources = dismissedResourceLoader()
+        let loadedLastScanAt = overviewLock.withLock { cachedLastSecurityOverviewScanAt }
+        let overview = SecurityOverviewBuilder.build(
+            folders: folderEntries,
+            extensions: extensionEntries,
+            discoveredResources: loadedDiscoveredResources,
+            dismissedResources: loadedDismissedResources,
+            activities: loadedActivities,
+            coverageGaps: coverageGapLoader(),
+            lastSuccessfulScanAt: loadedLastScanAt,
+            pathExists: pathExists,
+            now: now()
+        )
         return Snapshot(
             folders: folderEntries,
             extensions: extensionEntries,
@@ -304,7 +353,9 @@ public final class MenuBarDataSource {
                 daemonRunning: daemonRunning,
                 installationStatus: loadedInstallationStatus
             ),
-            cdpGuardHealth: Self.cdpGuardHealth(in: loadedAuditLogPath, now: now())
+            cdpGuardHealth: Self.cdpGuardHealth(in: loadedAuditLogPath, now: now()),
+            securityOverview: overview,
+            lastSecurityOverviewScanAt: loadedLastScanAt
         )
     }
 
@@ -320,6 +371,8 @@ public final class MenuBarDataSource {
         protectionEnabled = snapshot.protectionEnabled
         status = snapshot.status
         cdpGuardHealth = snapshot.cdpGuardHealth
+        securityOverview = snapshot.securityOverview
+        lastSecurityOverviewScanAt = snapshot.lastSecurityOverviewScanAt
     }
 
     public static func computeStatus(protectedCount: Int, daemonRunning: Bool) -> ProtectionStatus {
