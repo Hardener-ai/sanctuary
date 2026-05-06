@@ -4,35 +4,18 @@
 
 # Sanctuary
 
-**Sanctuary by Hardener** stops AI agents from accessing your wallets, SSH keys,
-cloud credentials, and secrets.
+**Stop AI agents from accessing your wallets, SSH keys, and secrets.**
+
+Sanctuary by Hardener is a local macOS security layer for people running AI
+coding agents on machines that also hold wallets, browser profiles, SSH keys,
+cloud credentials, and password manager state.
 
 > Status: v0.1 pre-launch. The code is open for review and contribution.
 > Signed production binaries are not yet available.
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPLv3-blue.svg)](LICENSE)
 [![Security policy](https://img.shields.io/badge/security-policy-red.svg)](SECURITY.md)
-[![macOS](https://img.shields.io/badge/platform-macOS-black.svg)](docs/demo/README.md)
-
-<p align="center">
-  <a href="docs/demo/video/sanctuary-demo.mp4">
-    <img src="docs/demo/screenshots/01-hero.png" alt="Sanctuary launch demo" width="880">
-  </a>
-</p>
-
-<p align="center">
-  <a href="docs/demo/video/sanctuary-demo.mp4">Watch the short demo video</a>
-</p>
-
-## Why Sanctuary Exists
-
-AI coding agents are powerful because they can read files, run commands, inspect
-browsers, and chain tools. That same access can cross a line: wallet extension
-storage, SSH keys, cloud credentials, browser sessions, password manager state.
-
-Sanctuary is a local macOS security layer for that exact boundary. It identifies
-AI agent processes, watches sensitive resources, blocks browser CDP wallet
-attacks, and writes tamper-evident audit logs so the user can see what happened.
+[![Platform: macOS](https://img.shields.io/badge/platform-macOS-black.svg)](README.md)
 
 ## What Works Today
 
@@ -52,29 +35,6 @@ attacks, and writes tamper-evident audit logs so the user can see what happened.
   continuity.
 - **Daemon peer monitoring** and `pf` rule re-validation with tamper detection.
 - **Reproducible e2e attack scenarios** that produce markdown evidence.
-
-## Screenshots
-
-| Menu bar protections | CDP Guard block |
-| --- | --- |
-| ![Menu bar protections](docs/demo/screenshots/02-menu-bar-protections.png) | ![CDP Guard block](docs/demo/screenshots/03-cdp-guard-block.png) |
-
-| Audit feed | Reproducible proof |
-| --- | --- |
-| ![Audit feed](docs/demo/screenshots/04-audit-feed.png) | ![E2E proof](docs/demo/screenshots/05-e2e-proof.png) |
-
-## v0.1 Protection Model
-
-Sanctuary has three protection tiers:
-
-- **Detection**: record that an agent touched a sensitive resource.
-- **Denial**: block the event and surface an error to the actor.
-- **Invisibility**: make the resource appear absent to the agent.
-
-v0.1 ships detection across protected filesystem and extension-storage
-surfaces, plus denial for protected browser CDP attachment. v0.2, conditional
-on Apple's Endpoint Security entitlement, moves filesystem and extension
-storage toward the invisibility model.
 
 ## Verify It Works
 
@@ -140,6 +100,9 @@ Key specs:
 - **v1.0**: shared Rust core for classifier, policy decisions, registry parsing,
   and audit verification after multiple platform implementations prove the
   common shape.
+
+Real screenshots and demo video will be added after Apple Developer ID signing
+and a real recorded walkthrough.
 
 ## Security Reports
 
