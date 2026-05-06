@@ -55,7 +55,7 @@ The demo video is the launch. Critical path is whatever makes the demo work end-
 
 ## Roadmap after v0.1
 
-v0.2 is the first post-launch hardening release. It assumes Apple Endpoint Security entitlement is available and focuses on filesystem/extension-storage enforcement, invisibility where the platform permits it, human-in-the-loop approval for sensitive agent access, and workspace-scoped exceptions for legitimate project workflows. See `specs/INVISIBILITY_SPEC.md`, `specs/HUMAN_APPROVAL_SPEC.md`, and `specs/CAPABILITY_SCOPING_SPEC.md`.
+v0.2 is the first post-launch hardening release. It assumes Apple Endpoint Security entitlement is available and focuses on filesystem/extension-storage enforcement, invisibility where the platform permits it, human-in-the-loop approval for sensitive agent access, workspace-scoped exceptions for legitimate project workflows, and a Security Overview UI showing the user what sensitive resources exist on their Mac and how Sanctuary covers them. See `specs/INVISIBILITY_SPEC.md`, `specs/HUMAN_APPROVAL_SPEC.md`, `specs/CAPABILITY_SCOPING_SPEC.md`, and `specs/SECURITY_OVERVIEW_SPEC.md`.
 
 Cross-platform expansion is intentionally staged. macOS remains Swift-native through launch and v0.2. Windows work can proceed in a separate repo with a Windows-native stack. A shared Rust core is deferred to v1.0 after the classifier spike proved pure logic ports well but a full macOS rewrite is not justified. See `specs/CROSS_PLATFORM_ARCHITECTURE.md`.
 

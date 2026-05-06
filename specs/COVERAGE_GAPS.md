@@ -3,7 +3,7 @@
 **Status**: v0.1 operational gap inventory  
 **Audience**: users making deployment decisions, contributors choosing high-impact work, security reviewers  
 **Derived from**: `THREAT_MODEL.md` §4  
-**Related specs**: `CLASSIFIER_SPEC.md`, `CDP_GUARD_SPEC.md`, `FSEVENTS_DETECTION_SPEC.md`, `TAMPER_RESISTANCE_SPEC.md`, `INVISIBILITY_SPEC.md`, `CAPABILITY_SCOPING_SPEC.md`, `HUMAN_APPROVAL_SPEC.md`, `CROSS_PLATFORM_ARCHITECTURE.md`, `APPLE_ES_APPLICATION.md`
+**Related specs**: `CLASSIFIER_SPEC.md`, `CDP_GUARD_SPEC.md`, `FSEVENTS_DETECTION_SPEC.md`, `TAMPER_RESISTANCE_SPEC.md`, `INVISIBILITY_SPEC.md`, `CAPABILITY_SCOPING_SPEC.md`, `HUMAN_APPROVAL_SPEC.md`, `SECURITY_OVERVIEW_SPEC.md`, `CROSS_PLATFORM_ARCHITECTURE.md`, `APPLE_ES_APPLICATION.md`
 
 ---
 
@@ -378,6 +378,8 @@ Contributors should reference the gap number in any PR or issue. For example: "A
 Open a GitHub issue before starting substantial work. Many gaps require Apple entitlements, UX decisions, or privacy review before code is useful. Small research PRs are welcome when they add fixtures, compatibility matrices, or documented reproduction steps.
 
 Follow the existing pattern: write or update the spec first, add focused tests, then implement the smallest useful slice. For anything touching process identity, protected paths, audit logs, TCC, Keychain, Network Extension, or Endpoint Security, assume review will be strict.
+
+`SECURITY_OVERVIEW_SPEC.md` defines how v0.2 surfaces these coverage gaps in the user-facing overview so users can see unsupported or partially covered categories without reading this document first.
 
 Do not submit PRs that collect secret values, inspect file contents, or phone home. Sanctuary's privacy posture is part of the security model, not a nice-to-have.
 
