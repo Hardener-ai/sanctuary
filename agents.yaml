@@ -1,0 +1,707 @@
+version: 1
+updated: 2026-05-06
+entries:
+  - id: claude-code
+    friendly_name: Claude Code
+    category: foreground-coding
+    executable_names: [claude, claude-code]
+    bundle_identifiers: [com.anthropic.claude-code]
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/claude, /opt/homebrew/bin/claude]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://docs.claude.com/claude-code
+    notes: ""
+  - id: cursor
+    friendly_name: Cursor
+    category: foreground-coding
+    executable_names: [Cursor, cursor]
+    bundle_identifiers: [com.cursor.Cursor, com.todesktop.230313mzl4w4u92]
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/Applications/Cursor.app/Contents/MacOS/Cursor]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://cursor.com
+    notes: ""
+  - id: codex-cli
+    friendly_name: Codex CLI
+    category: foreground-coding
+    executable_names: [codex]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/codex, /opt/homebrew/bin/codex]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/openai/codex
+    notes: ""
+  - id: codex-ide
+    friendly_name: Codex IDE Extension
+    category: foreground-coding
+    executable_names: [Code, Cursor]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: []
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/openai/codex
+    notes: "IDE extension host detection depends on extension marker and parent process context."
+  - id: cline
+    friendly_name: Cline
+    category: foreground-coding
+    executable_names: [Code, Cursor, node]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: []
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/cline/cline
+    notes: "Runs inside VS Code-compatible extension hosts."
+  - id: continue
+    friendly_name: Continue
+    category: foreground-coding
+    executable_names: [Code, Cursor, node]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: []
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/continuedev/continue
+    notes: "Runs inside VS Code-compatible extension hosts."
+  - id: roo-code
+    friendly_name: Roo Code
+    category: foreground-coding
+    executable_names: [Code, Cursor, node]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: []
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/RooCodeInc/Roo-Code
+    notes: "Runs inside VS Code-compatible extension hosts."
+  - id: aider
+    friendly_name: Aider
+    category: foreground-coding
+    executable_names: [aider]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/aider, /opt/homebrew/bin/aider]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://aider.chat
+    notes: ""
+  - id: goose
+    friendly_name: Goose
+    category: foreground-coding
+    executable_names: [goose]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/goose, /opt/homebrew/bin/goose]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/block/goose
+    notes: ""
+  - id: zed-ai
+    friendly_name: Zed AI
+    category: foreground-coding
+    executable_names: [Zed, zed]
+    bundle_identifiers: [dev.zed.Zed]
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/Applications/Zed.app/Contents/MacOS/Zed]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://zed.dev
+    notes: ""
+  - id: windsurf
+    friendly_name: Windsurf
+    category: foreground-coding
+    executable_names: [Windsurf, windsurf]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/Applications/Windsurf.app/Contents/MacOS/Windsurf]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://windsurf.com
+    notes: ""
+  - id: trae
+    friendly_name: Trae
+    category: foreground-coding
+    executable_names: [Trae, trae]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/Applications/Trae.app/Contents/MacOS/Trae]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://www.trae.ai
+    notes: ""
+  - id: devin-local
+    friendly_name: Devin Local Agent
+    category: foreground-coding
+    executable_names: [devin]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/devin, /opt/homebrew/bin/devin]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://devin.ai
+    notes: ""
+  - id: smol-developer
+    friendly_name: smol developer
+    category: foreground-coding
+    executable_names: [smol-dev, smol-developer]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/smol-dev, /opt/homebrew/bin/smol-dev]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/smol-ai/developer
+    notes: ""
+  - id: openhands
+    friendly_name: OpenHands
+    category: foreground-coding
+    executable_names: [openhands]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/openhands, /opt/homebrew/bin/openhands]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/All-Hands-AI/OpenHands
+    notes: ""
+  - id: gpt-engineer
+    friendly_name: GPT Engineer
+    category: foreground-coding
+    executable_names: [gpt-engineer]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/gpt-engineer, /opt/homebrew/bin/gpt-engineer]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/gpt-engineer-org/gpt-engineer
+    notes: ""
+  - id: plandex
+    friendly_name: Plandex
+    category: foreground-coding
+    executable_names: [plandex]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/plandex, /opt/homebrew/bin/plandex]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/plandex-ai/plandex
+    notes: ""
+  - id: aide
+    friendly_name: Aide
+    category: foreground-coding
+    executable_names: [Aide, aide]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/Applications/Aide.app/Contents/MacOS/Aide]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://aide.dev
+    notes: ""
+  - id: cody-cli
+    friendly_name: Cody CLI
+    category: foreground-coding
+    executable_names: [cody]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/cody, /opt/homebrew/bin/cody]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://sourcegraph.com/cody
+    notes: ""
+  - id: tabby-agent
+    friendly_name: Tabby Agent
+    category: foreground-coding
+    executable_names: [tabby, tabby-agent]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/tabby-agent, /opt/homebrew/bin/tabby-agent]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://tabby.tabbyml.com
+    notes: ""
+  - id: augment
+    friendly_name: Augment
+    category: foreground-coding
+    executable_names: [Augment, augment]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/Applications/Augment.app/Contents/MacOS/Augment]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://augmentcode.com
+    notes: ""
+  - id: clawdbot
+    friendly_name: ClawdBot
+    category: background-service
+    executable_names: [clawdbot]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/clawdbot, /opt/homebrew/bin/clawdbot]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: ["*clawdbot*.plist"]
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: ""
+    notes: "Local background agent; often deployed as a LaunchAgent."
+  - id: openclaw
+    friendly_name: OpenClaw
+    category: background-service
+    executable_names: [openclaw]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/openclaw, /opt/homebrew/bin/openclaw]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: ["*openclaw*.plist"]
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: ""
+    notes: "Local background agent; often deployed as a LaunchAgent."
+  - id: hermes-agent
+    friendly_name: Hermes Agent
+    category: background-service
+    executable_names: [hermes, hermes-agent]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/hermes, /opt/homebrew/bin/hermes]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: ["*hermes*.plist"]
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: ""
+    notes: ""
+  - id: hermes-subagent
+    friendly_name: Hermes Subagent
+    category: background-service
+    executable_names: [hermes-subagent]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/hermes-subagent, /opt/homebrew/bin/hermes-subagent]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: ["*hermes*subagent*.plist"]
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: ""
+    notes: ""
+  - id: langgraph-worker
+    friendly_name: LangGraph Worker
+    category: background-service
+    executable_names: [langgraph, langgraph-worker]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/langgraph, /opt/homebrew/bin/langgraph]
+    runtime_fingerprint:
+      python_modules: [langgraph]
+      node_packages: ["@langchain/langgraph"]
+    launchd_plist_patterns: ["*langgraph*.plist"]
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/langchain-ai/langgraph
+    notes: ""
+  - id: langchain-agent
+    friendly_name: LangChain Agent
+    category: background-service
+    executable_names: [langchain, langchain-agent]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/langchain, /opt/homebrew/bin/langchain]
+    runtime_fingerprint:
+      python_modules: [langchain]
+      node_packages: [langchain]
+    launchd_plist_patterns: ["*langchain*.plist"]
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/langchain-ai/langchain
+    notes: ""
+  - id: crewai-worker
+    friendly_name: CrewAI Worker
+    category: background-service
+    executable_names: [crewai, crewai-worker]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/crewai, /opt/homebrew/bin/crewai]
+    runtime_fingerprint:
+      python_modules: [crewai]
+      node_packages: []
+    launchd_plist_patterns: ["*crewai*.plist"]
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/crewAIInc/crewAI
+    notes: ""
+  - id: autogen-worker
+    friendly_name: AutoGen Worker
+    category: background-service
+    executable_names: [autogen, autogen-worker]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/autogen, /opt/homebrew/bin/autogen]
+    runtime_fingerprint:
+      python_modules: [autogen]
+      node_packages: []
+    launchd_plist_patterns: ["*autogen*.plist"]
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/microsoft/autogen
+    notes: ""
+  - id: smolagents-runner
+    friendly_name: smolagents Runner
+    category: background-service
+    executable_names: [smolagents, smolagents-runner]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/smolagents, /opt/homebrew/bin/smolagents]
+    runtime_fingerprint:
+      python_modules: [smolagents]
+      node_packages: []
+    launchd_plist_patterns: ["*smolagents*.plist"]
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/huggingface/smolagents
+    notes: ""
+  - id: mastra-worker
+    friendly_name: Mastra Worker
+    category: background-service
+    executable_names: [mastra, mastra-worker]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/mastra, /opt/homebrew/bin/mastra]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: [mastra, "@mastra/core"]
+    launchd_plist_patterns: ["*mastra*.plist"]
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://mastra.ai
+    notes: ""
+  - id: browser-use
+    friendly_name: Browser Use
+    category: browser-agent
+    executable_names: [browser-use]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/browser-use, /opt/homebrew/bin/browser-use]
+    runtime_fingerprint:
+      python_modules: [browser_use, browser-use]
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/browser-use/browser-use
+    notes: ""
+  - id: skyvern
+    friendly_name: Skyvern
+    category: browser-agent
+    executable_names: [skyvern]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/skyvern, /opt/homebrew/bin/skyvern]
+    runtime_fingerprint:
+      python_modules: [skyvern]
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/Skyvern-AI/skyvern
+    notes: ""
+  - id: multion
+    friendly_name: MultiOn
+    category: browser-agent
+    executable_names: [multion]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/usr/local/bin/multion, /opt/homebrew/bin/multion]
+    runtime_fingerprint:
+      python_modules: [multion]
+      node_packages: [multion]
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://www.multion.ai
+    notes: ""
+  - id: python-anthropic-sdk
+    friendly_name: Python Anthropic SDK
+    category: runtime-fingerprint
+    executable_names: []
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: []
+    runtime_fingerprint:
+      python_modules: [anthropic]
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/anthropics/anthropic-sdk-python
+    notes: ""
+  - id: python-openai-sdk
+    friendly_name: Python OpenAI SDK
+    category: runtime-fingerprint
+    executable_names: []
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: []
+    runtime_fingerprint:
+      python_modules: [openai]
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/openai/openai-python
+    notes: ""
+  - id: python-mcp-sdk
+    friendly_name: Python MCP SDK
+    category: runtime-fingerprint
+    executable_names: []
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: []
+    runtime_fingerprint:
+      python_modules: [mcp]
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/modelcontextprotocol/python-sdk
+    notes: ""
+  - id: node-anthropic-sdk
+    friendly_name: Node Anthropic SDK
+    category: runtime-fingerprint
+    executable_names: []
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: []
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: ["@anthropic-ai/sdk"]
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/anthropics/anthropic-sdk-typescript
+    notes: ""
+  - id: node-openai-sdk
+    friendly_name: Node OpenAI SDK
+    category: runtime-fingerprint
+    executable_names: []
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: []
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: [openai]
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/openai/openai-node
+    notes: ""
+  - id: node-mcp-sdk
+    friendly_name: Node MCP SDK
+    category: runtime-fingerprint
+    executable_names: []
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: []
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: ["@modelcontextprotocol/sdk"]
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/modelcontextprotocol/typescript-sdk
+    notes: ""
+  - id: node-vercel-ai-sdk
+    friendly_name: Node Vercel AI SDK
+    category: runtime-fingerprint
+    executable_names: []
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: []
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: [ai]
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: https://github.com/vercel/ai
+    notes: ""
+  - id: hermes-agent-python
+    friendly_name: Hermes Agent (Nous Research)
+    category: background-service
+    executable_names: [hermes]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/Users/*/.hermes, ~/.hermes]
+    runtime_fingerprint:
+      python_modules: [hermes_agent, hermes_cli]
+      node_packages: []
+    launchd_plist_patterns: ["ai.hermes.*"]
+    confidence_when_signed: high
+    confidence_when_unsigned: high
+    reference_url: https://github.com/NousResearch/hermes-agent
+    notes: "Python package shipped via pip; pure-Python so dylib detection fails. Use argv -m hermes_cli pattern, venv path prefix ~/.hermes, or LaunchAgent label ai.hermes.gateway."
+  - id: openclaw-node
+    friendly_name: OpenClaw
+    category: background-service
+    executable_names: [openclaw]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [/opt/homebrew/lib/node_modules/openclaw, ~/.openclaw]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: [openclaw, "@anthropic-ai/sdk", "@modelcontextprotocol/sdk"]
+    launchd_plist_patterns: ["ai.openclaw.*"]
+    confidence_when_signed: high
+    confidence_when_unsigned: high
+    reference_url: ""
+    notes: "Node package; entrypoint typically /opt/homebrew/lib/node_modules/openclaw/dist/index.js. Match via Node argv inspection or LaunchAgent label ai.openclaw.gateway / .env."
+  - id: clawdbot-pending
+    friendly_name: ClawdBot
+    category: background-service
+    executable_names: [clawdbot]
+    bundle_identifiers: []
+    team_identifiers: [null]
+    code_signing_identifiers: []
+    install_paths: [~/.clawdbot, "~/Library/Application Support/clawdbot"]
+    runtime_fingerprint:
+      python_modules: []
+      node_packages: []
+    launchd_plist_patterns: []
+    confidence_when_signed: high
+    confidence_when_unsigned: medium
+    reference_url: ""
+    notes: "Installed on dogfood machine but no live process observed. Runtime type unverified. Update fields when a live process is available to inspect."

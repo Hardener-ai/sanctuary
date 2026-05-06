@@ -1,0 +1,6 @@
+No ALTQ support in kernel
+ALTQ related functions disabled
+Status: Disabled                         Debug: Urgent
+
+State Table                          Total             Rate
+  current entries                        0

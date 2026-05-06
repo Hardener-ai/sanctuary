@@ -1,0 +1,35 @@
+{
+  "attempted_steps" : [
+    "load NEFilterManager preferences",
+    "configure NEFilterProviderConfiguration with filterSockets=true and provider bundle id",
+    "attempt saveToPreferences to activate the content filter",
+    "open localhost TCP listener and connect from same process",
+    "emit JSON result; no NEFilterDataProvider callback was reachable from this SwiftPM-only controller"
+  ],
+  "conclusion" : "inconclusive-filter-manager-configuration-did-not-activate-provider",
+  "entitlement_status" : "unknown",
+  "expected_pid" : 13846,
+  "localhost_probe" : {
+    "bytesReceived" : 25,
+    "bytesSent" : 25,
+    "connectionSucceeded" : true,
+    "listenerPort" : 54028
+  },
+  "loopback_flow_observed" : false,
+  "manager_attempt" : {
+    "filterSockets" : true,
+    "grade" : "firewall",
+    "loadFromPreferences" : "timed-out",
+    "providerBundleIdentifier" : "app.sanctuary.ne-filter-spike.extension",
+    "removeFromPreferences" : "not-run-save-failed",
+    "saveToPreferences" : "timed-out"
+  },
+  "observed_identity_fields" : {
+
+  },
+  "sdk_observation" : {
+    "sourceAppAuditTokenAvailability" : "macOS 10.15+ public NEFilterFlow field",
+    "sourceAppIdentifierAvailability" : "iOS-only; unavailable on macOS",
+    "sourceProcessAuditTokenAvailability" : "macOS 13.0+ public NEFilterFlow field"
+  }
+}
