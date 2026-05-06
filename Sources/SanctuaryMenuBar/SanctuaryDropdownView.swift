@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-only
+import AppKit
 import SanctuaryCore
 import Foundation
 import SwiftUI
@@ -40,6 +41,13 @@ struct SanctuaryDropdownView: View {
                 if showResumeSetup {
                     ResumeSetupRow(action: onResumeSetup)
                 }
+                divider
+                SecurityOverviewSection(
+                    snapshot: dataSource.securityOverview,
+                    onProtectResource: handleOverviewProtect,
+                    onOpenAudit: openAuditLog,
+                    onRescan: rescanSecurityOverview
+                )
                 divider
                 FoldersSection(
                     folders: dataSource.folders,
@@ -172,6 +180,35 @@ struct SanctuaryDropdownView: View {
         }
     }
 
+    private func handleOverviewProtect(_ resource: SecurityOverviewResource) {
+        switch resource.categoryID {
+        case .browserWalletExtensions, .browserPasswordManagerExtensions, .browserProfileSessions:
+            addWallet()
+        case .sshIdentities, .cloudCredentials, .gpgKeys, .standaloneWalletApps, .standalonePasswordManagerApps, .customResources, .shellHistory:
+            if let path = resource.displayPath, path.hasPrefix("/") || path.hasPrefix("~") {
+                Task { @MainActor in
+                    do {
+                        try await dataSource.protectFolder(path)
+                    } catch {
+                        logMenuBarError("protect overview resource failed: \(error)")
+                    }
+                }
+            } else {
+                addFolder()
+            }
+        }
+    }
+
+    private func openAuditLog() {
+        NSWorkspace.shared.open(URL(fileURLWithPath: SanctuaryPaths.auditLogPath()))
+    }
+
+    private func rescanSecurityOverview() {
+        Task { @MainActor in
+            dataSource.rescanSecurityOverview()
+        }
+    }
+
     private func handleProtectionToggle(_ isOn: Bool) {
         Task { @MainActor in
             protectionToggleBusy = true
@@ -266,6 +303,23 @@ private extension MenuBarDataSource {
                 isDenial: false
             )
         ]
+        source.securityOverview = SecurityOverviewBuilder.build(
+            folders: source.folders,
+            extensions: source.extensions,
+            discoveredResources: [
+                DiscoveredResource(
+                    categoryID: .browserWalletExtensions,
+                    title: "Phantom",
+                    profilePath: "/Users/tg/Library/Application Support/BraveSoftware/Brave-Browser/Default",
+                    extensionID: "bfnaelmomeimhlpmgjnjophhpkkoljpa"
+                )
+            ],
+            dismissedResources: [],
+            activities: source.activities,
+            coverageGaps: SecurityOverviewBuilder.defaultCoverageGaps(),
+            lastSuccessfulScanAt: Date(),
+            pathExists: { _ in true }
+        )
         return source
     }
 }
