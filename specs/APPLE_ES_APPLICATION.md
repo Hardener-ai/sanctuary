@@ -16,7 +16,7 @@ application submitted through Apple Developer Program Support.
 **Registration number:** OI-390525
 **Registered address:** Vistra (Cayman) Limited, 31119 Grand Pavilion, Hibiscus
 Way, 802 West Bay Road, Grand Cayman, KY1-1205, Cayman Islands
-**Apple Developer Team ID:** [insert team ID]
+**Apple Developer Team ID:** N5BS88PDXP
 **Primary contact:** Tobias Graf, Founder
 **Email:** `hello@hardener.ai`
 **Website:** `https://hardener.ai`
@@ -185,7 +185,7 @@ We welcome guidance on:
 - [ ] Verify Apple Developer Program enrollment is under "JULC Limited"
   matching the Cayman registration on this application. Entity mismatch is the
   most common cause of rejection or extended review; resolve before submitting.
-- [ ] Apple Developer Team ID entered above.
+- [x] Apple Developer Team ID entered above.
 - [ ] Developer ID Application certificate installed locally.
 - [ ] Developer ID Installer certificate installed locally.
 - [ ] `notarytool` keychain profile created.
