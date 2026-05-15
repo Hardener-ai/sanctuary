@@ -136,7 +136,48 @@ Hardener Cloud control plane (future)
 The runtime must remain useful without Hardener Cloud. Cloud policy and audit
 export are enterprise features, not local enforcement dependencies.
 
-## 6. Build and Distribution
+## 6. Signed Targets and Bundle IDs
+
+Sanctuary is built as three separately signed targets. The split exists for
+security boundary reasons (each target has the minimum entitlements it needs)
+and for Apple review reasons (Endpoint Security clients are reviewed as their
+own binary with a tightly scoped entitlement).
+
+| Target | Bundle ID | Role |
+| --- | --- | --- |
+| Menu bar app | `ai.hardener.sanctuary.menubar` | SwiftUI menu bar UX, onboarding, activity feed, approval prompts. |
+| Daemon | `ai.hardener.sanctuary.daemon` | Privileged local runtime, installed via SMAppService LaunchDaemon. |
+| Endpoint Security client (v0.2+) | `ai.hardener.sanctuary.endpointsecurity` | ES event subscriber. Gated on Apple ES entitlement approval. |
+
+### Signing and Entitlements
+
+All three targets are signed with the JULC Limited Developer ID Application
+certificate (Team ID `N5BS88PDXP`) and notarized via `notarytool` before
+distribution. Hardened runtime is enabled for all three.
+
+Entitlements per target:
+
+- `menubar`: standard hardened runtime, no privileged entitlements.
+  Communicates with the daemon over a Unix domain socket.
+- `daemon`: SMAppService LaunchDaemon registration. Owns the policy DB, audit
+  log, and capability decision engine.
+- `endpointsecurity`: `com.apple.developer.endpoint-security.client` (pending
+  Apple approval, Request ID `D9D8KA6NTK` submitted 2026-05-15). Subscribes to
+  the narrow ES event set documented in `specs/APPLE_ES_APPLICATION.md` and
+  forwards decisions to the daemon.
+
+### IPC Boundary
+
+The menu bar app and the ES client both communicate with the daemon over a Unix
+domain socket at `~/Library/Application Support/sanctuary/daemon.sock`. The
+daemon is the single source of truth for policy, grants, and audit. UI and ES
+subscription are clients of the daemon, not peers.
+
+This split means the ES client can be updated, replaced, or temporarily
+disabled without affecting the daemon's policy state, and the menu bar app can
+be killed and relaunched without losing in-flight grants.
+
+## 7. Build and Distribution
 
 Current source build:
 
@@ -158,7 +199,7 @@ Developer ID signing and notarization are next. The intended release pipeline:
 
 Homebrew cask distribution is planned after the first notarized release.
 
-## 7. Business Model
+## 8. Business Model
 
 Sanctuary runtime:
 
@@ -179,14 +220,14 @@ Hardener Cloud:
 Commercial runtime licensing is available for proprietary embedding. See
 `COMMERCIAL.md`.
 
-## 8. Current Verification State
+## 9. Current Verification State
 
 - `swift test`: 410 tests on `main`.
 - `./e2e/run-all.sh`: 6 PASS / 2 SKIP without `E2E_PF=1`.
 - `E2E_PF=1 ./e2e/run-all.sh`: expected 8 PASS with scoped sudoers configured.
 - `bundle.sh`: produces `dist/SanctuaryMenuBar.app`.
 
-## 9. Immediate Next Steps
+## 10. Immediate Next Steps
 
 1. Submit Apple Endpoint Security entitlement application using
    `specs/APPLE_ES_APPLICATION.md`.
@@ -195,7 +236,7 @@ Commercial runtime licensing is available for proprietary embedding. See
 4. Record real demo against signed build.
 5. Prepare launch post and agent-vendor outreach around `docs/SDK.md`.
 
-## 10. Decision Log
+## 11. Decision Log
 
 **Runtime framing over consumer helper:** The buyer and long-term moat are in
 agent security infrastructure. Wallet and SSH-key protection remain the
