@@ -107,6 +107,7 @@ Planned v0.2 work:
 The v0.2 model is documented in:
 
 - `specs/APPLE_ES_APPLICATION.md`
+- `specs/ES_CLIENT_ARCHITECTURE.md`
 - `specs/INVISIBILITY_SPEC.md`
 - `specs/CAPABILITY_SCOPING_SPEC.md`
 - `specs/HUMAN_APPROVAL_SPEC.md`
