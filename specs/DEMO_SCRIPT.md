@@ -122,9 +122,12 @@ Technical req: nothing. Editorial.
 ### Beat 3: The shield (40s)
 
 **0:50-0:55**
-On-screen: terminal. User types `brew install --cask sanctuary`. Install completes. Menu bar shows shield icon (gray → green).
+On-screen: browser or terminal. User downloads the signed build from
+`hardener.ai` or runs the notarized installer package. Install completes. Menu
+bar shows shield icon.
 Voiceover: *"One install."*
-Technical req: real `brew install --cask sanctuary` works. Menu bar icon appears.
+Technical req: signed and notarized build installs cleanly. Menu bar icon
+appears. Homebrew cask footage waits until the cask is actually published.
 
 **0:55-1:00**
 On-screen: menu bar dropdown opens. User clicks "Protect this Chrome profile". Toggle flips. Submenu shows: MetaMask ☑ Phantom ☐ 1Password ☑. User confirms.
@@ -150,7 +153,7 @@ Technical req: audit log entry exists and renders in menu bar.
 
 **1:35-1:40**
 On-screen: full-screen card. Logo + tagline + URL.
-Text: "Sanctuary. The AI agent shield. sanctuary.app"
+Text: "Sanctuary by Hardener. The security runtime for AI agents. hardener.ai"
 Voiceover: silence. End.
 
 ---
@@ -162,7 +165,7 @@ Working backwards from the shot list, the load-bearing technical features are:
 | Beat | Required v0.1 capability | Spec |
 |---|---|---|
 | 0:25-0:45 (the drain) | Reproducible CDP-based wallet drain with **Sanctuary off** | Pre-existing — this is the attack we're demonstrating, not a Sanctuary feature |
-| 0:50-0:55 | `brew install --cask sanctuary` works | Distribution / packaging |
+| 0:50-0:55 | Signed build or notarized installer works | Distribution / packaging |
 | 0:55-1:00 | Menu bar profile + extension toggles work | SwiftUI menu bar + policy DB |
 | 1:00-1:10 | Stable behavior across re-runs | classifier + CDP guard |
 | 1:10-1:25 | **CDP Guard drops the agent connection** — wallet untouched | CDP_GUARD_SPEC |
@@ -197,7 +200,7 @@ A 90-second video has room for ONE attack and ONE defense. Make it the most visc
 - [ ] Malicious skill written, packaged, installable via the agent CLI we're filming
 - [ ] Recording machine: clean macOS user account with nothing personal on it
 - [ ] Sanctuary v0.1 build that passes integration tests 11-15 (CDP Guard) and 11-15 (Extension Storage)
-- [ ] Brew tap or direct .pkg signed and notarized
+- [ ] Direct .pkg or signed app build notarized. Homebrew cask only if published before shoot day.
 - [ ] DND on, notifications off, network drives unmounted, dock cleared
 
 ### Shoot day (week 5)
