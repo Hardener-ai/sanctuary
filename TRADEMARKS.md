@@ -1,8 +1,7 @@
 # Trademark Policy
 
 The names "Sanctuary" and "Hardener", the Hardener logo (when published), and
-related branding elements are trademarks of Hardener (Tobias Graf / JULC
-Limited).
+related branding elements are trademarks of Hardener, operated by JULC Limited.
 
 ## What the AGPL v3 License Does Cover
 

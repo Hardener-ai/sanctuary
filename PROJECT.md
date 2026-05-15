@@ -1,99 +1,142 @@
 # Sanctuary
 
-## What this is
+## What This Is
 
-Sanctuary is a macOS security product for people running local AI agents. It assumes an agent may become compromised and limits the blast radius by making sensitive local resources invisible or unreachable to known agent processes.
+Sanctuary is the security runtime for AI agents on macOS. It gives local agents
+capability scoping, human approval, containment, and tamper-resistant audit.
 
-The beachhead user is the crypto-native developer or trader who runs tools like Claude Code, Cursor, Cline, Aider, OpenClaw, or Codex on a machine that also contains wallets, browser profiles, SSH keys, API credentials, and clipboard secrets.
+The v0.1 runtime is local-first and open source. Hardener Cloud is the future
+commercial enterprise control plane for fleet policy, audit export, SSO, and
+compliance reporting.
+
+## Current Status
+
+v0.1 is pre-launch and functionally implemented.
+
+- Public repo: `https://github.com/Hardener-ai/sanctuary`
+- License: AGPL v3 plus trademark policy
+- Tests: 410 on `main`
+- e2e: 8 scenarios, with `pf` scenarios gated by `E2E_PF=1`
+- Current blocker: Apple Developer distribution work and ES entitlement
+  submission
 
 ## Architecture
 
-Sanctuary has a root daemon, a CLI, a menu bar app, and OS enforcement components. The daemon owns policy, process identity, hardware-gated overrides, and append-only audit logging. CDP guard, clipboard sentinel, and extension storage protection are layered as separate modules. Endpoint Security is the strongest filesystem enforcement path but not the v0.1 blocker; FSEvents-based detection is the ship-now alternative.
+Sanctuary has:
 
-## File layout
+- `SanctuaryCore`: classifier, policy DB, audit log, detection surfaces, CDP
+  Guard, peer monitoring, path resolution.
+- `SanctuaryCLI`: command-line policy, inventory, setup, and log tools.
+- `SanctuaryDaemon`: local daemon that runs detection and protection services.
+- `SanctuaryMenuBar`: SwiftUI menu bar console, onboarding, controls, activity
+  feed, and Security Overview.
+- `e2e/`: reproducible attack scenarios that produce markdown evidence.
 
+The daemon owns policy, process identity, detection surfaces, and audit logging.
+The menu bar app owns first-run UX, status, protection controls, Security
+Overview, and future human approval prompts.
+
+## v0.1 Shipping Surface
+
+- Agent classifier with known-agent registry, runtime detection, parent-chain
+  inspection, user-tagged agents, and trusted paths.
+- Protected folder and extension storage policy DB.
+- FSEvents-backed detection for folders and extension storage.
+- CDP Guard real-time block for protected Chromium browser profiles.
+- Tamper-evident audit log with signatures and SHA-256 hash chain.
+- Daemon peer monitoring.
+- `pf` rule revalidation and auto-recovery.
+- SMAppService daemon install flow.
+- Menu bar onboarding, activity feed, protected-resource display, and Security
+  Overview.
+- End-to-end proof scenarios.
+
+## Deferred From v0.1
+
+- Endpoint Security filesystem enforcement.
+- Runtime SDK server.
+- Runtime Touch ID approvals for arbitrary capability grants.
+- Clipboard mediation.
+- Keychain mediation.
+- Screen capture and Accessibility mediation.
+- Hardener Cloud fleet control plane.
+
+## Roadmap
+
+### v0.1
+
+Ship signed and notarized macOS runtime. Record real demo. Publish source,
+release artifacts, and proof scenarios.
+
+### v0.2
+
+Capability runtime:
+
+- SDK surface from `docs/SDK.md`.
+- Endpoint Security enforcement.
+- Invisibility where Apple APIs permit it.
+- Human approval with Touch ID.
+- Workspace-scoped exceptions.
+- Stronger tamper resistance and policy integrity.
+
+### v0.3
+
+Hardener Cloud:
+
+- Central policy management.
+- Fleet audit aggregation.
+- SSO/RBAC.
+- SIEM export.
+- Compliance reports.
+
+### v1.0
+
+Standardization:
+
+- Shared Rust core after multiple platform implementations prove the common
+  shape.
+- SDK adoption by agent vendors.
+- Windows and Linux plans continue from `specs/CROSS_PLATFORM_ARCHITECTURE.md`.
+
+## Critical Path
+
+1. Public repositioning around "AI agent security runtime".
+2. Submit Apple Endpoint Security entitlement application.
+3. Install Developer ID certificates locally.
+4. Land signing and notarization release pipeline.
+5. Record real demo against signed build.
+6. Publish launch materials and begin agent-vendor outreach.
+
+## Key Files
+
+- Product spec: `SPEC.md`
+- Threat model: `specs/THREAT_MODEL.md`
+- Coverage gaps: `specs/COVERAGE_GAPS.md`
+- ES entitlement application: `specs/APPLE_ES_APPLICATION.md`
+- SDK draft: `docs/SDK.md`
+- Commercial boundary: `COMMERCIAL.md`
+- Bundle script: `Sources/SanctuaryMenuBar/scripts/bundle.sh`
+- e2e suite: `e2e/run-all.sh`
+
+## Known Issues / Gotchas
+
+- No Developer ID signing identities are installed locally yet.
+- Endpoint Security entitlement can take weeks to months; submit early.
+- v0.1 filesystem protection is detection-only without ES.
+- `PROJECT.md` and `SPEC.md` should stay aligned with what actually ships;
+  avoid reintroducing unshipped clipboard/keychain/screen claims as v0.1.
+- Homebrew cask is planned but not published.
+
+## How To Run
+
+```sh
+swift test
+./Sources/SanctuaryMenuBar/scripts/bundle.sh
+./e2e/run-all.sh
 ```
-.
-├── Package.swift
-├── README.md
-├── SCOPE.md
-├── PROJECT.md
-├── SPEC.md
-├── agents.yaml
-├── specs/
-│   ├── AGENT_REGISTRY_SPEC.md
-│   ├── CLASSIFIER_SPEC.md
-│   ├── CDP_GUARD_SPEC.md
-│   ├── MCP_PROTECTION_SPEC.md
-│   ├── NE_FILTER_SPIKE.md
-│   ├── EXTENSION_STORAGE_SPEC.md
-│   ├── DEMO_SCRIPT.md
-│   ├── FSEVENTS_DETECTION_SPEC.md
-│   ├── CDP_PEER_PID_SPIKE.md
-│   └── APPLE_ES_APPLICATION.md
-├── Sources/
-│   ├── SanctuaryCLI/
-│   ├── SanctuaryCore/
-│   ├── SanctuaryDaemon/
-│   └── SanctuaryMenuBar/
-├── SystemExtensions/
-│   └── SanctuaryEndpointSecurity/
-└── Tests/
-    └── SanctuaryCoreTests/
+
+For `pf` scenarios:
+
+```sh
+E2E_PF=1 ./e2e/run-all.sh
 ```
-
-## Critical path for v0.1 (re-ranked)
-
-The demo video is the launch. Critical path is whatever makes the demo work end-to-end. Endpoint Security entitlement is **not** on the critical path — it's a side task that ships into v0.2 hardening if/when Apple approves.
-
-1. **Agent classifier robustness** — everything depends on this being right. See `specs/CLASSIFIER_SPEC.md`.
-2. **CDP guard implementation** — the demo's enforcement layer. See `specs/CDP_GUARD_SPEC.md`.
-3. **Browser extension storage protection** — pairs with CDP guard for the wallet drain-block demo. See `specs/EXTENSION_STORAGE_SPEC.md`.
-4. **Demo video production** — the entire launch is this video. See `specs/DEMO_SCRIPT.md`.
-5. **FSEvents-based filesystem detection** — works without ES entitlement, ships in v0.1 as detection-with-alert. Upgrades to enforcement when entitlement lands. See `specs/FSEVENTS_DETECTION_SPEC.md`.
-6. **Apple ES entitlement** — submit and forget. See `specs/APPLE_ES_APPLICATION.md`. ~4 hours of writing, then move on.
-
-## Roadmap after v0.1
-
-v0.2 is the first post-launch hardening release. It assumes Apple Endpoint Security entitlement is available and focuses on filesystem/extension-storage enforcement, invisibility where the platform permits it, human-in-the-loop approval for sensitive agent access, and workspace-scoped exceptions for legitimate project workflows. A Security Overview UI showing the user what sensitive resources exist on their Mac and how Sanctuary covers them is included in v0.1. See `specs/INVISIBILITY_SPEC.md`, `specs/HUMAN_APPROVAL_SPEC.md`, `specs/CAPABILITY_SCOPING_SPEC.md`, and `specs/SECURITY_OVERVIEW_SPEC.md`.
-
-Cross-platform expansion is intentionally staged. macOS remains Swift-native through launch and v0.2. Windows work can proceed in a separate repo with a Windows-native stack. A shared Rust core is deferred to v1.0 after the classifier spike proved pure logic ports well but a full macOS rewrite is not justified. See `specs/CROSS_PLATFORM_ARCHITECTURE.md`.
-
-## Key decisions and why
-
-- macOS first because the beachhead audience is concentrated there and the platform exposes the deepest enforcement primitives.
-- Swift first because Endpoint Security, System Extensions, LocalAuthentication, SwiftUI, and packaging all align with native macOS development.
-- OS-level protection over wrappers because direct syscalls, child shells, and non-wrapped libraries bypass advisory controls. Where ES is unavailable in v0.1, FSEvents detection + alert is the honest fallback.
-- Free OSS core plus paid Pro/Team tiers because trust and inspectability matter for crypto-native adoption.
-- Sanctuary is the product under Hardener, with GitHub org `Hardener-ai` as the repository home.
-
-## Known issues / gotchas
-
-- Apple ES entitlement may take 4-12 weeks. v0.1 ships without it on the FSEvents detection path. ES is a v0.2 hardening upgrade.
-- Keychain interception is implementation-uncertain; a Sanctuary-managed encrypted vault is the v0.1 fallback if interception proves blocked.
-- CDP guard process attribution for localhost WebSocket clients is the trickiest piece in v0.1. See `specs/CDP_GUARD_SPEC.md` §4.
-- False positives are existential for UX; heuristics prompt, never auto-block.
-
-## Where to look for X
-
-- Product definition: `SPEC.md`
-- Scope and boundaries: `SCOPE.md`
-- Component specs: `specs/`
-- Swift package targets: `Package.swift`
-- Shared primitives: `Sources/SanctuaryCore/`
-- CLI entry point: `Sources/SanctuaryCLI/`
-- Daemon entry point: `Sources/SanctuaryDaemon/`
-- Menu bar placeholder: `Sources/SanctuaryMenuBar/`
-- Endpoint Security notes: `SystemExtensions/SanctuaryEndpointSecurity/`
-
-## Active work
-
-- Classifier foundation now has registry loading, LaunchAgent / LaunchDaemon origin classification, MCP identity inheritance, and 56 passing tests
-- Build `proc_pidfdinfo`-based `PeerProcessAttributor` for CDP Guard
-- Stand up CDP guard skeleton against `CDP_GUARD_SPEC.md`
-- Continue remaining classifier hardening against real macOS process identity collection and cache invalidation
-- Submit Apple ES entitlement application using `APPLE_ES_APPLICATION.md` narrative
-
-## Status
-
-🚧 just started
