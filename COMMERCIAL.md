@@ -57,19 +57,19 @@ a short description of your intended use.
 
 ## Contributions
 
-Hardener intends to use either a Contributor License Agreement or a Developer
-Certificate of Origin process before accepting substantial external
-contributions. The purpose is to keep the licensing model clear for both the
-AGPL runtime and commercial licensing.
+JULC Limited (operating as Hardener) intends to use either a Contributor License
+Agreement or a Developer Certificate of Origin process before accepting
+substantial external contributions. The purpose is to keep the licensing model
+clear for both the AGPL runtime and commercial licensing.
 
 Until that process is finalized, maintainers may ask contributors to confirm
 authorship and licensing rights explicitly in pull requests.
 
 ## Trademarks
 
-"Sanctuary", "Hardener", and "Hardener Cloud" are trademarks of Hardener,
-operated by JULC Limited. The AGPL grants no trademark rights. See
-[`TRADEMARKS.md`](TRADEMARKS.md).
+"Sanctuary", "Hardener", and "Hardener Cloud" are trademarks of JULC Limited
+(Cayman Islands, registration OI-390525). The AGPL grants no trademark rights.
+See [`TRADEMARKS.md`](TRADEMARKS.md).
 
 ## Legal Entity
 

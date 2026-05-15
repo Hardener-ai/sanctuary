@@ -3,6 +3,7 @@
 **Status:** Draft for submission
 **Entitlement:** `com.apple.developer.endpoint-security.client`
 **Applicant:** JULC Limited, operating as Hardener
+**Jurisdiction:** Cayman Islands (registration OI-390525)
 **Product:** Sanctuary, a security runtime for AI agents on macOS
 
 This document is the canonical source for the Endpoint Security entitlement
@@ -10,10 +11,9 @@ application submitted through Apple Developer Program Support.
 
 ## 1. Company
 
-**Legal entity:** JULC Limited
-**Operating name:** Hardener
-**Country of incorporation:** Cayman Islands
-**Company registration number:** OI-390525
+**Legal entity:** JULC Limited, operating as Hardener
+**Jurisdiction:** Cayman Islands
+**Registration number:** OI-390525
 **Registered address:** Vistra (Cayman) Limited, 31119 Grand Pavilion, Hibiscus
 Way, 802 West Bay Road, Grand Cayman, KY1-1205, Cayman Islands
 **Apple Developer Team ID:** [insert team ID]
@@ -182,6 +182,9 @@ We welcome guidance on:
 
 ## 9. Submission Checklist
 
+- [ ] Verify Apple Developer Program enrollment is under "JULC Limited"
+  matching the Cayman registration on this application. Entity mismatch is the
+  most common cause of rejection or extended review; resolve before submitting.
 - [ ] Apple Developer Team ID entered above.
 - [ ] Developer ID Application certificate installed locally.
 - [ ] Developer ID Installer certificate installed locally.
@@ -197,3 +200,4 @@ We welcome guidance on:
 | Date | Change |
 | --- | --- |
 | 2026-05-15 | Refreshed for AI agent security runtime and enterprise deployment framing. |
+| 2026-05-15 | Entity corrected to JULC Limited (Cayman, OI-390525). Added enrollment-verification step to submission checklist. |

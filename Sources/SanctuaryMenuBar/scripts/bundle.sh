@@ -89,8 +89,13 @@ if command -v codesign >/dev/null 2>&1; then
         codesign --force --sign "$developer_id" --options runtime --entitlements "$ENTITLEMENTS" "$DAEMON_DEST" >/dev/null
         codesign --force --sign "$developer_id" --options runtime --entitlements "$ENTITLEMENTS" "$APP_BUNDLE" >/dev/null
     else
-        echo "Warning: no Developer ID Application identity found; using ad-hoc signing."
-        echo "Production SMAppService install flow requires a Developer ID signed app."
+        echo "" >&2
+        echo "================================================================" >&2
+        echo "WARNING: signing with ad-hoc identity." >&2
+        echo "This build is NOT suitable for distribution." >&2
+        echo "Install a Developer ID Application certificate before shipping." >&2
+        echo "================================================================" >&2
+        echo "" >&2
         codesign --force --sign - "$DAEMON_DEST" >/dev/null
         codesign --force --sign - "$APP_BUNDLE" >/dev/null
     fi
