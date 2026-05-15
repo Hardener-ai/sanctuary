@@ -1,6 +1,6 @@
 # Apple Endpoint Security Entitlement Application
 
-**Status:** Draft for submission
+**Status:** Submitted to Apple on 2026-05-15 (Request ID: D9D8KA6NTK)
 **Entitlement:** `com.apple.developer.endpoint-security.client`
 **Applicant:** JULC Limited, operating as Hardener
 **Jurisdiction:** Cayman Islands (registration OI-390525)
@@ -182,17 +182,17 @@ We welcome guidance on:
 
 ## 9. Submission Checklist
 
-- [ ] Verify Apple Developer Program enrollment is under "JULC Limited"
+- [x] Verify Apple Developer Program enrollment is under "JULC Limited"
   matching the Cayman registration on this application. Entity mismatch is the
   most common cause of rejection or extended review; resolve before submitting.
 - [x] Apple Developer Team ID entered above.
-- [ ] Developer ID Application certificate installed locally.
-- [ ] Developer ID Installer certificate installed locally.
-- [ ] `notarytool` keychain profile created.
-- [ ] Public repository README aligned with this runtime framing.
-- [ ] `hardener.ai` product page live.
-- [ ] Application submitted through Apple's entitlement request flow.
-- [ ] Submission timestamp recorded.
+- [x] Developer ID Application certificate installed locally.
+- [x] Developer ID Installer certificate installed locally.
+- [x] `notarytool` keychain profile created.
+- [x] Public repository README aligned with this runtime framing.
+- [x] `hardener.ai` product page live.
+- [x] Application submitted through Apple's entitlement request flow.
+- [x] Submission timestamp recorded.
 - [ ] Follow-up reminder set for 14 days after submission.
 
 ## 10. Revision History
@@ -201,3 +201,4 @@ We welcome guidance on:
 | --- | --- |
 | 2026-05-15 | Refreshed for AI agent security runtime and enterprise deployment framing. |
 | 2026-05-15 | Entity corrected to JULC Limited (Cayman, OI-390525). Added enrollment-verification step to submission checklist. |
+| 2026-05-15 | Submitted Endpoint Security entitlement request to Apple. Request ID: D9D8KA6NTK. |
